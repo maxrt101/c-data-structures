@@ -23,9 +23,9 @@ typedef struct {
 #define CARRAY_SIZE(a) ((a)->size)
 #define CARRAY_CAPACITY(a) ((a)->capacity)
 
-#define CARRAY_FOR(T, a, iter) for (int i = 0; i < CARRAY_SIZE(a); iter=CARRAY_GET(T, a, i), i++)
-#define CARRAY_FOR_PTR(T, a, iter) for (T* iter = (a)->data; iter-(T*)(a)->data < CARRAY_SIZE(a); iter++)
-#define CARRAY_FOREACH(T, a, f) for (int i = 0; i < CARRAY_SIZE(a); i++) f(CARRAY_GET(T, a, i))
+#define CARRAY_FOR(T, a, iter)      for (int i = 0; i < CARRAY_SIZE(a); iter=CARRAY_GET(T, a, i), i++)
+#define CARRAY_FOR_PTR(T, a, iter)  for (T* iter = (a)->data; iter-(T*)(a)->data < CARRAY_SIZE(a); iter++)
+#define CARRAY_FOREACH(T, a, f)     for (int i = 0; i < CARRAY_SIZE(a); i++) f(CARRAY_GET(T, a, i))
 #define CARRAY_FOREACH_PTR(T, a, f) for (T* x= (a)->data; x-(T*)(a)->data < CARRAY_SIZE(a); x++) f(x)
 
 #define CARRAY_PUSH(T, a, e)\
@@ -57,13 +57,13 @@ typedef struct {
 
 
 CArray* c_array_new(int sizeof_element);
-void c_array_free(CArray* array);
-void c_array_init(CArray* array, int sizeof_element);
-void c_array_cleanup(CArray* array);
-void c_array_resize(CArray* array, int new_size);
-void c_array_copy(CArray* dest, CArray* src);
+void    c_array_free(CArray* array);
+void    c_array_init(CArray* array, int sizeof_element);
+void    c_array_cleanup(CArray* array);
+void    c_array_resize(CArray* array, int new_size);
+void    c_array_copy(CArray* dest, CArray* src);
 CArray* c_array_make_copy(CArray* src);
-bool c_array_contains(CArray* array, void* data);
+bool    c_array_contains(CArray* array, void* data);
 
 #endif
 
