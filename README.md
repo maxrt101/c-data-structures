@@ -4,7 +4,7 @@ Common data structures implemented in c.
 
 ### Structures:
  - [x] c-array - dynamic array
- - [ ] c-list - linked list
+ - [X] c-list - linked list
  - [ ] c-hashmap - hash map
  - [ ] c-btree - binary tree
  - [ ] c-string - string wrapper
