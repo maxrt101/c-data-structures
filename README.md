@@ -10,7 +10,10 @@ Steps:
 
 If you need to install cds into a different folder use `make PREFIX=/path/to/install/folder`
 
-### TODO:
+### Tests:
+To run tests execute `make test`
+
+### TODO/DONE:
  - [x] carray  - Dynamic array
  - [X] clist   - Linked list
  - [x] cstring - String wrapper
