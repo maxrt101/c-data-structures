@@ -50,3 +50,14 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Editors
+.sw*
+.*.sw*
+.vscode
+
+# MacOS
+.DS_Store
+
+# Project Specific
+build
