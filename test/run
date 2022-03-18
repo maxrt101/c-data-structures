@@ -1,0 +1,31 @@
+#!/bin/bash
+
+SELF="$0"
+
+readonly COLOR_RED='\033[0;31m'
+readonly COLOR_GREEN='\033[0;32m'
+readonly COLOR_BLUE='\033[0;34'
+readonly COLOR_YELLOW='\033[1;33'
+readonly COLOR_CYAN='\033[0;36'
+readonly COLOR_RESET='\033[0m'
+
+FOLDER="build/bin"
+[ ! -z "$1" ] && FOLDER="$1"
+
+succeded="0"
+failed="0"
+
+for test in $FOLDER/*; do
+  $test
+  ret=$?
+  if [ "$ret" == "0" ]; then
+    ((++succeded))
+    echo -e "[  ${COLOR_GREEN}OK${COLOR_RESET}  ] $(basename $test)"
+  else
+    echo -e "[ ${COLOR_RED}FAIL${COLOR_RESET} ] $(basename $test) ($ret)"
+    ((++failed))
+  fi
+done
+
+echo -e "Succeded: ${COLOR_GREEN}${succeded}${COLOR_RESET}"
+echo -e "Failed:   ${COLOR_RED}${failed}${COLOR_RESET}"

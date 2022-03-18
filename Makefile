@@ -5,7 +5,7 @@ export PREFIX ?= $(TOPDIR)/build
 export BUILD  := $(TOPDIR)/build
 export CC     := gcc
 export AR     := ar
-export CFLAGS := -std=c11 -c -I$(BUILD)/include
+export CFLAGS := -std=c11 -I$(BUILD)/include
 
 TARGET := $(PREFIX)/lib/libcds.a
 SRC    := src/memory.c \
@@ -45,5 +45,12 @@ prepare:
 clean:
 	$(info [+] Cleaning up)
 	rm -rf $(BUILD)/obj
+
+test: build
+	$(info [+] Running tests)
+	for file in test/*.c; do \
+		$(CC) $(CFLAGS) -L$(PREFIX)/lib $$file -lcds -o "$(BUILD)/bin/$$(basename $${file%.*})" 2>/dev/null; \
+	done
+	./test/run $(BUILD)/bin
 
 $(V).SILENT:
