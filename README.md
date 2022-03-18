@@ -1,16 +1,18 @@
 # c-data-structures
-
-Common data structures implemented in c.
-
-### Structures:
- - [x] c-array - dynamic array
- - [X] c-list - linked list
- - [ ] c-hashmap - hash map
- - [ ] c-btree - binary tree
- - [ ] c-string - string wrapper
+Common data structures implemented in c11.
 
 ### Installation:
-  - Clone/Download repo
-  - In repo folder type `make`, this will create `bin/` folder and generate `libcds.a` file
-  - To use, add `-L/path/to/lib/folder -lcds` to your compiler flags
+Prerequisites: `gcc` or `clang` & `make`  
+Steps:  
+  - Clone the repo
+  - Run `make`
+  - In `build/` folder you'll find `include/` folder with all header files and in `lib` - `libcds.a`
 
+If you need to install cds into a different folder use `make PREFIX=/path/to/install/folder`
+
+### TODO:
+ - [x] carray  - Dynamic array
+ - [X] clist   - Linked list
+ - [x] cstring - String wrapper
+ - [ ] ctable  - Hash map
+ - [ ] cbtree  - Binary tree

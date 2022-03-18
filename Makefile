@@ -1,27 +1,49 @@
-# c-data-structures
+# c-data-structures (cds)
 
+export TOPDIR := $(shell pwd)
+export PREFIX ?= $(TOPDIR)/build
+export BUILD  := $(TOPDIR)/build
 export CC     := gcc
 export AR     := ar
-export CFLAGS := -c -Isrc/
+export CFLAGS := -std=c11 -c -I$(BUILD)/include
 
-NAME          := cds
-LIBNAME       := lib$(NAME).a
-OBJS          := $(addsuffix .o, $(basename $(wildcard src/*.c src/*/*.c)))
+TARGET := $(PREFIX)/lib/libcds.a
+SRC    := src/memory.c \
+          src/clist/clist.c \
+          src/carray/carray.c \
+          src/cstring/cstring.c
 
-.PHONY: all
+.PHONY: build
 
-all: prepare compile clean
+build: compile
+	$(info [+] Building $(notdir $(TARGET)))
+	$(AR) cr $(TARGET) $(BUILD)/obj/*.o
 
-compile: $(OBJS)
-	rm -f bin/$(LIBNAME)
-	$(AR) cr bin/$(LIBNAME) $(OBJS)
+compile: install-headers
+	$(info [+] Compiling sources)
+	for file in $(SRC); do \
+		$(CC) -c $(CFLAGS) $$file -o "$(BUILD)/obj/$$(basename $${file%.*}).o"; \
+	done
 
-$(OBJS): %.o : %.c
-	$(CC) $(CFLAGS) $< -o $@
+install-headers: prepare
+	$(info [+] Installing headers)
+	cp src/memory.h $(PREFIX)/include/cds
+	cp src/clist/clist.h $(PREFIX)/include/cds
+	cp src/carray/carray.h $(PREFIX)/include/cds
+	cp src/cstring/cstring.h $(PREFIX)/include/cds
 
 prepare:
-	mkdir -p bin
+	$(info [+] Creating directories)
+	mkdir -p $(BUILD)
+	mkdir -p $(BUILD)/obj
+	mkdir -p $(PREFIX)
+	mkdir -p $(PREFIX)/bin
+	mkdir -p $(PREFIX)/lib
+	mkdir -p $(PREFIX)/include
+	mkdir -p $(PREFIX)/include/cds
 
 clean:
-	rm $(OBJS)
+	$(info [+] Cleaning up)
+	rm -rf $(BUILD)/obj
 
+$(V).SILENT:
