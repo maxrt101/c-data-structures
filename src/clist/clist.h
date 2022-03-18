@@ -77,7 +77,7 @@ void _clist_remove_at(clist_t* list, int index, clist_unary_t deleter);
 // void clist_remove_if(clist* list, clist_predicate_t pred);
 // void clist_sort(clist_t* list, clist_binary_t comparator);
 
-int clist_find_pos(clist_t* list, clist_t* element);
+int clist_find_pos(clist_t* element);
 clist_t* clist_find(clist_t* list, clist_predicate_t fn);
 
 #endif /* _CDS_CLIST_H_ */

@@ -112,7 +112,8 @@ void _clist_remove_at(clist_t* list, int index, clist_unary_t deleter) {
   _clist_remove(clist_get(list, index), deleter);
 }
 
-int clist_find_pos(clist_t* list, clist_t* element) {
+int clist_find_pos(clist_t* element) {
+  clist_t* list = clist_first(element);
   int index = 0;
   CLIST_FOR(list, e) {
     if (e == element) {
