@@ -25,14 +25,19 @@ int main() {
 
   if (i125 != 5) return 1;
 
+  int v125 = 125;
+  i125 = carray_find_inline(int, iarr, &v125);
+
+  if (i125 != 5) return 2;
+
   CARRAY_FOR_I(iarr) {
-    if (carray_get(int, iarr, i) != expected[i]) return 2;
+    if (carray_get(int, iarr, i) != expected[i]) return 3;
   }
 
   carray_int_t* iarr2 = carray_copy(iarr);
 
   CARRAY_FOR_I(iarr2) {
-    if (carray_get(int, iarr2, i) != expected[i]) return 3;
+    if (carray_get(int, iarr2, i) != expected[i]) return 4;
   }
 
   carray_free(iarr);

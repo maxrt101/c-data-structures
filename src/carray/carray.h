@@ -76,7 +76,7 @@ struct carray_t {
 #define carray_remove(T, arr, idx) \
   do { \
     if (idx < carray_size(arr)) {\
-      for (size_t i = idx; i < carray_size(arr)-1; i++) {\
+      for (size_t i = idx; i < carray_size(arr)-1; i++) { \
         carray_get(T, arr, i) = carray_get(T, arr, i+1); \
       } \
       carray_size(arr)--; \
@@ -94,6 +94,8 @@ struct carray_t {
     } \
   } while (0)
 
+#define carray_find_inline(T, arr, element) _carry_find(arr, sizeof(T), element)
+
 carray_t* _carray_new(size_t sizeof_element, size_t initial_capacity);
 void _carray_create(carray_t* array, size_t sizeof_element, size_t initial_capacity);
 void carray_delete(carray_t* array);
@@ -101,6 +103,7 @@ void carray_free(carray_t* array);
 void carray_resize(carray_t* array, size_t new_size);
 void carray_clone(carray_t* src, carray_t* dest);
 carray_t* carray_copy(carray_t* array);
+size_t _carry_find(carray_t* array, size_t sizeof_element, void* element);
 
 // void carray_sort(carray_t* array, pred) // macro?
 // void carray_remove_if() // macro? (T, arr, rhs > lhs)

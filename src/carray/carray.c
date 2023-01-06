@@ -42,7 +42,7 @@ void carray_resize(carray_t* array, size_t new_size) {
 }
 
 void carray_clone(carray_t* src, carray_t* dest) {
-  if (!src) return;
+  if (!src || !dest) return;
   dest->size = src->size;
   dest->capacity = src->capacity;
   dest->sizeof_element = src->sizeof_element;
@@ -55,4 +55,14 @@ carray_t* carray_copy(carray_t* array) {
   carray_t* copy = new(carray_t);
   carray_clone(array, copy);
   return copy;
+}
+
+size_t _carry_find(carray_t* array, size_t sizeof_element, void* element) {
+  if (!array || !element) return -1;
+  CARRAY_FOR_I(array) {
+    if (!memcmp(array->data + (i * sizeof_element), element, sizeof_element)) {
+      return i;
+    }
+  }
+  return -1;
 }

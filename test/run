@@ -15,12 +15,12 @@ FOLDER="build/bin"
 succeded="0"
 failed="0"
 
-for test in $FOLDER/*; do
+for test in $FOLDER/test_*; do
   $test
   ret=$?
   if [ "$ret" == "0" ]; then
-    ((++succeded))
     echo -e "[  ${COLOR_GREEN}OK${COLOR_RESET}  ] $(basename $test)"
+    ((++succeded))
   else
     echo -e "[ ${COLOR_RED}FAIL${COLOR_RESET} ] $(basename $test) ($ret)"
     ((++failed))
@@ -29,3 +29,4 @@ done
 
 echo -e "Succeded: ${COLOR_GREEN}${succeded}${COLOR_RESET}"
 echo -e "Failed:   ${COLOR_RED}${failed}${COLOR_RESET}"
+

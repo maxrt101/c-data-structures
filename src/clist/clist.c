@@ -60,9 +60,6 @@ clist_t* clist_last(clist_t* list) {
 
 void clist_prepend(clist_t* list, clist_t* element) {
   if (!list || !element) return;
-  /*while (list->prev) {
-    list = list->prev;
-  }*/
   list = clist_first(list);
   list->prev = element;
   element->next = list;
@@ -70,9 +67,6 @@ void clist_prepend(clist_t* list, clist_t* element) {
 
 void clist_append(clist_t* list, clist_t* element) {
   if (!list || !element) return;
-  /*while (list->next) {
-    list = list->next;
-  }*/
   list = clist_last(list);
   list->next = element;
   element->prev = list;

@@ -5,7 +5,7 @@ export PREFIX ?= $(TOPDIR)/build
 export BUILD  := $(TOPDIR)/build
 export CC     := gcc
 export AR     := ar
-export CFLAGS := -std=c11 -I$(BUILD)/include
+export CFLAGS := -std=c11 -I$(BUILD)/include -Wno-incompatible-pointer-types
 
 TARGET := $(PREFIX)/lib/libcds.a
 SRC    := src/memory.c \
@@ -49,7 +49,7 @@ clean:
 test: build
 	$(info [+] Running tests)
 	for file in test/*.c; do \
-		$(CC) $(CFLAGS) -L$(PREFIX)/lib $$file -lcds -o "$(BUILD)/bin/$$(basename $${file%.*})" 2>/dev/null; \
+		$(CC) $(CFLAGS) -L$(PREFIX)/lib $$file -lcds -o "$(BUILD)/bin/$$(basename $${file%.*})" 2>$(if $(V),&1,/dev/null); \
 	done
 	./test/run $(BUILD)/bin
 
